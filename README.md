@@ -13,11 +13,11 @@ pip install fracodim
 ## Usage
 
 ```python
-import fracodim
+import fracodim.correlationDimension as fcd
 
 dataset = [[a0,a1,...,an], [b0,b1,...,bn], ...]
 
-fracodim.CorrelationDimension(dataset) # returns a float estimate of the correlation dimension
+fcd.CorrelationDimension(dataset) # returns a float estimate of the correlation dimension
 
 ```
 
