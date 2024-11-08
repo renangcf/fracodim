@@ -14,4 +14,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     url='https://github.com/renangcf/fracodim',
+    long_description=open('README.md').read(),
 )
