@@ -2,7 +2,14 @@ from TreeNode import TreeNode
 from scipy.stats import linregress
 import math
 
-def CorrelationDimension(points, dimension, hypergridSideSize):
+def CorrelationDimension(points):
+    
+    try:
+        dimension = getDatasetDimension(points)
+    except ValueError as e:
+        print(e)
+
+    hypergridSideSize = getHyperSize(points)
     root = TreeNode(dimension)
     sidesizeValues = [math.log(hypergridSideSize, 10)]
     sumSquaredOccupancies = []
@@ -57,3 +64,20 @@ def cellPicker(point, sideSize):
             point[i] -= sideSize
         
     return "".join([str(x) for x in cell])
+
+def getDatasetDimension(dataset):
+    if not dataset:
+        raise ValueError("Dataset cannot be empty.")
+    
+    first_point_dimension = len(dataset[0])
+    
+    for point in dataset:
+        if len(point) != first_point_dimension:
+            raise ValueError("Dataset contains points with different dimensions.")
+    
+    return first_point_dimension
+
+def getHyperSize(dataset):
+    flattened_coords = [coordinate for point in dataset for coordinate in point]
+
+    return max(flattened_coords)
