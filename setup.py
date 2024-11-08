@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fracodim',
-    version='0.2',
+    version='1.0',
     packages=find_packages(),
     author='Renan Gomes',
     author_email='renangcfreitas@gmail.com',

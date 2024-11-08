@@ -1,4 +1,4 @@
-from listNode import listNode
+from .listNode import listNode
 
 nodeIndex = 0
 
