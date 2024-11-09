@@ -1,6 +1,6 @@
 # Fractal Correlation Dimension Estimator
 
-This package estimates the correlation dimesion of any N-dimensional dataset.
+This package estimates the correlation dimension of any N-dimensional dataset.
 
 ## Installation
 
@@ -18,15 +18,16 @@ import fracodim.correlationDimension as fcd
 dataset = [[a0,a1,...,an], [b0,b1,...,bn], ...]
 
 fcd.CorrelationDimension(dataset) # returns a float estimate of the correlation dimension
-
 ```
 
-The package accepts N-ary datasets, where each point can have n coordinates.
+The package accepts N-ary datasets, where each point must have n coordinates.
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
