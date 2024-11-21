@@ -13,7 +13,7 @@ def CorrelationDimension(points):
     root = TreeNode(dimension)
     sidesizeValues = [math.log(hypergridSideSize, 10)]
     sumSquaredOccupancies = []
-    myTree = {i: [] for i in range(2**dimension)}
+    myTree = {i: [] for i in range(dimension + 1)}
 
     for point in points:
         cellSize = hypergridSideSize
@@ -26,8 +26,11 @@ def CorrelationDimension(points):
             root.setRootCounter()
             currentNode = root.getPointer(0)
 
-        for i in range(1, (2**dimension)):
+        for i in range(1, dimension + 1):
             cellSize = cellSize / 2
+            
+            if cellSize == 0:
+                break
 
             if math.log(cellSize, 10) not in sidesizeValues:
                 sidesizeValues.append(math.log(cellSize, 10))
@@ -37,14 +40,14 @@ def CorrelationDimension(points):
             if currentNode not in myTree[i]:
                 myTree[i].append(currentNode)
 
-            if currentNode.getCounter(cell) == 0 and i != (2**dimension - 1):
+            if currentNode.getCounter(cell) == 0 and i != (dimension):
                 currentNode.setCellCounter(cell)
                 currentNode.addChild(cell)
                 currentNode = currentNode.getPointer(cell)
             else:
                 currentNode.setCellCounter(cell)
                 currentNode = currentNode.getPointer(cell)
-    
+
     for level in myTree:
         level_counter = 0
         for node in myTree[level]:
