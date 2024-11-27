@@ -68,6 +68,7 @@ def cellPicker(point, bounds):
             cell.append(0)
             bounds[i] = (start, midpoint)
         else:
+            cell.append(1)
             bounds[i] = (midpoint, end)
     
     return ''.join(map(str, cell))
