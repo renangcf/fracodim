@@ -17,6 +17,7 @@ def CorrelationDimension(points):
 
     for point in points:
         cellSize = hypergridSideSize
+        bounds = [(0, cellSize)] * len(point)
         
         if(root.getCounter(0) == 0):
             root.setRootCounter()
@@ -35,7 +36,7 @@ def CorrelationDimension(points):
             if math.log(cellSize, 10) not in sidesizeValues:
                 sidesizeValues.append(math.log(cellSize, 10))
 
-            cell = cellPicker(point, cellSize)
+            cell = cellPicker(point, bounds)
 
             if currentNode not in myTree[i]:
                 myTree[i].append(currentNode)
@@ -56,17 +57,24 @@ def CorrelationDimension(points):
 
     return linregress(sidesizeValues, sumSquaredOccupancies).slope
 
-def cellPicker(point, sideSize):
+def cellPicker(point, bounds):
     cell = []
 
-    for i, coordinate in enumerate(point):      
-        if coordinate <= sideSize:
-            cell.append(0)
-        else:
-            cell.append(1)
-            point[i] -= sideSize
+    # Iterate over each dimension of the point
+    for i, coordinate in enumerate(point):
+        start, end = bounds[i]
+        midpoint = (start + end) / 2  # Midpoint for the current cell (based on the current bounds)
         
-    return "".join([str(x) for x in cell])
+        # Determine if the point is in the lower or upper half of the current bounds
+        if coordinate < midpoint:
+            cell.append(0)  # Inferior half
+            bounds[i] = (start, midpoint)  # Update bounds to the inferior half
+        else:
+            cell.append(1)  # Superior half
+            bounds[i] = (midpoint, end)  # Update bounds to the superior half
+    
+    # Return the binary string representing the cell
+    return ''.join(map(str, cell))
 
 def getDatasetDimension(dataset):
     if not dataset:
