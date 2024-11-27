@@ -60,20 +60,16 @@ def CorrelationDimension(points):
 def cellPicker(point, bounds):
     cell = []
 
-    # Iterate over each dimension of the point
     for i, coordinate in enumerate(point):
         start, end = bounds[i]
-        midpoint = (start + end) / 2  # Midpoint for the current cell (based on the current bounds)
+        midpoint = (start + end) / 2
         
-        # Determine if the point is in the lower or upper half of the current bounds
         if coordinate < midpoint:
-            cell.append(0)  # Inferior half
-            bounds[i] = (start, midpoint)  # Update bounds to the inferior half
+            cell.append(0)
+            bounds[i] = (start, midpoint)
         else:
-            cell.append(1)  # Superior half
-            bounds[i] = (midpoint, end)  # Update bounds to the superior half
+            bounds[i] = (midpoint, end)
     
-    # Return the binary string representing the cell
     return ''.join(map(str, cell))
 
 def getDatasetDimension(dataset):
