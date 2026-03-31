@@ -1,6 +1,6 @@
 # Fractal Correlation Dimension Estimator
 
-This package estimates the correlation dimension of any N-dimensional dataset.
+This package estimates the correlation dimension of any N-dimensional dataset for usage in similarity-search algorithms and multimetric spaces indexing. 
 
 ## Installation
 
